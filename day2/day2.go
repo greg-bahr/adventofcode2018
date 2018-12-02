@@ -44,7 +44,7 @@ func main() {
 	}
 }
 
-func diff(word1 string, word2 string) (num int, letters string) {
+func diff(word1 string, word2 string) (int, string) {
 	common := ""
 	diff := 0
 
