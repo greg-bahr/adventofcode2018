@@ -38,21 +38,13 @@ func main() {
 			for j := 0; j < width; j++ {
 				if fabric[i+top][j+left] > 0 {
 					fabric[i+top][j+left] = -1
+					sum++
 				} else if fabric[i+top][j+left] == 0 {
 					fabric[i+top][j+left] = id
 				}
 			}
 		}
 	}
-
-	for _, line := range fabric {
-		for _, num := range line {
-			if num == -1 {
-				sum++
-			}
-		}
-	}
-
 	fmt.Println(sum)
 
 	for _, line := range lines {
@@ -67,9 +59,14 @@ func main() {
 		overlaps := false
 
 		for i := 0; i < height; i++ {
+			if overlaps {
+				break
+			}
+
 			for j := 0; j < width; j++ {
 				if fabric[i+top][j+left] == -1 {
 					overlaps = true
+					break
 				}
 			}
 		}
