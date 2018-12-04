@@ -7,7 +7,6 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"time"
 )
 
 func check(e error) {
@@ -21,23 +20,14 @@ func main() {
 	check(err)
 
 	lines := strings.Split(string(file), "\r\n")
+	sort.Strings(lines)
 
 	re := regexp.MustCompile("[0-9]+")
-	reDate := regexp.MustCompile("\\d+-\\d+-\\d+ \\d+:\\d+")
-
-	sort.Slice(lines, func(i, j int) bool {
-		date1, _ := time.Parse("2006-01-02 15:04", reDate.FindString(lines[i]))
-		date2, _ := time.Parse("2006-01-02 15:04", reDate.FindString(lines[j]))
-
-		return date1.Before(date2)
-	})
 
 	guards := make(map[int][]int)
 
-	currentLocation := 0
 	currentGuard := -1
-
-	for currentLocation < len(lines) {
+	for currentLocation := 0; currentLocation < len(lines); currentLocation++ {
 		line := lines[currentLocation]
 		nums := re.FindAllString(line, -1)
 
@@ -60,8 +50,6 @@ func main() {
 				guards[currentGuard][i] += 1
 			}
 		}
-
-		currentLocation++
 	}
 
 	laziestGuard := -1
