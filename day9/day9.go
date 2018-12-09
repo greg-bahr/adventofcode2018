@@ -24,6 +24,11 @@ func main() {
 	numPlayers, _ := strconv.Atoi(nums[0])
 	lastWorth, _ := strconv.Atoi(nums[1])
 
+	fmt.Println(calculateWinningScore(numPlayers, lastWorth))
+	fmt.Println(calculateWinningScore(numPlayers, lastWorth*100))
+}
+
+func calculateWinningScore(numPlayers int, lastWorth int) int {
 	marbleValue := 1
 	currentPlayer := 0
 	marbles := ring.New(1)
@@ -56,5 +61,6 @@ func main() {
 			maxScore = score
 		}
 	}
-	fmt.Println(maxScore)
+
+	return maxScore
 }
